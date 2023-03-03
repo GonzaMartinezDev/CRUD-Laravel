@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Vista de inicio</h1>
+    <h1>Vista de inicio - cambio en la misma linea para el conflicto</h1>
     <h2>Titulo</h2>
 </body>
 </html>
