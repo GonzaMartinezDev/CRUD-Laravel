@@ -8,5 +8,6 @@
 </head>
 <body>
     <h1>Vista de inicio</h1>
+    <h2>Titulo</h2>
 </body>
 </html>
