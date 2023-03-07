@@ -7,8 +7,6 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>CRUD Post and Categories </h1>
-
-
+    
 </body>
 </html>
