@@ -1,12 +1,38 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
+@extends('dashboard.layout')
+
+@section('content')
+    <h1>view index</h1>
+
+    <a href="{{ route("post.create") }}">Create</a><br>
     
-</body>
-</html>
+    <table class="table">
+        <thead>
+            <tr>Title</tr>
+            <tr>Category</tr>
+            <tr>Posted</tr>
+            <tr>Actions</tr>
+        </thead>
+        <tbody>
+            @foreach ($posts as $post)
+                <tr>
+                    <td>{{ $post->title }}</td>
+                    <td>{{ $post->category }}</td>
+                    <td>{{ $post->posted }}</td>
+                    <td>
+                        <a href="{{ route("post.edit", $post->id) }}">Edit</a>
+                        <a href="{{ route("post.show", $post) }}">See</a>
+                        <form action="{{ route("post.destroy", $post) }}" method="post">
+                            @csrf
+                            @method("DELETE")
+                            <button type="submit">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                </tr>
+            @endforeach
+        </tbody>
+    </table>
+
+    {{ $posts->links() }}
+@endsection

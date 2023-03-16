@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\Post\StoreRequest;
+use App\Http\Requests\Post\EditRequest;
 use App\Models\Category;
 use App\Models\Post;
 use Illuminate\Http\Request;
@@ -13,19 +15,20 @@ class PostController extends Controller
      */
     public function index()
     {
-        //
+        $posts = Post::paginate(2);
+        return view('dashboard.post.index', compact('posts'));
     }
 
     public function create()
     {
+        $post = new Post();
         $categories = Category::pluck('id', 'title');
-        return view('dashboard.post.create', compact('categories'));
+        return view('dashboard.post.create', compact('categories', 'post'));
     }
 
-    public function store(Request $request)
+    public function store(StoreRequest $request)
     {
-        $data = array_merge($request->all(), ['image' => '']);
-        Post::create($data);
+        Post::create($request->validated());
     }
 
     /**
@@ -33,7 +36,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        //
+        return "View show";
     }
 
     /**
@@ -41,15 +44,16 @@ class PostController extends Controller
      */
     public function edit(Post $post)
     {
-        //
+        $categories = Category::pluck('id', 'title');
+        return view('dashboard.post.edit', compact('post', 'categories'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Post $post)
+    public function update(EditRequest $request, Post $post)
     {
-        //
+        $post->update($request->validated());
     }
 
     /**
@@ -57,6 +61,6 @@ class PostController extends Controller
      */
     public function destroy(Post $post)
     {
-        //
+        $post->delete();
     }
 }
