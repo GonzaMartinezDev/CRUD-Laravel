@@ -17,7 +17,6 @@ class CategoryController extends Controller
         $categories = Category::paginate(5);
         return view('dashboard.category.index', compact('categories'));
     }
-
     /**
      * Show the form for creating a new resource.
      */
