@@ -6,6 +6,7 @@ use App\Http\Requests\Post\StoreRequest;
 use App\Http\Requests\Post\EditRequest;
 use App\Models\Category;
 use App\Models\Post;
+use Illuminate\Auth\Events\Validated;
 use Illuminate\Http\Request;
 
 class PostController extends Controller
@@ -29,6 +30,7 @@ class PostController extends Controller
     public function store(StoreRequest $request)
     {
         Post::create($request->validated());
+        return redirect()->route('post.index');
     }
 
     /**
@@ -36,7 +38,7 @@ class PostController extends Controller
      */
     public function show(Post $post)
     {
-        return "View show";
+        return view('dashboard.post.show', compact('post'));
     }
 
     /**
@@ -53,7 +55,13 @@ class PostController extends Controller
      */
     public function update(EditRequest $request, Post $post)
     {
-        $post->update($request->validated());
+        $data = $request->validated();
+        if (isset($data['image'])) {
+            $data['image'] = time().".".$data['image']->extension();
+            $request->image->move(public_path('image'), $data['image']);
+        }
+        $post->update($data);
+        return redirect()->route('post.index')->with('status', 'Updated post!');
     }
 
     /**
@@ -62,5 +70,6 @@ class PostController extends Controller
     public function destroy(Post $post)
     {
         $post->delete();
+        return redirect()->route('post.index');
     }
 }

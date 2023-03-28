@@ -32,12 +32,7 @@ class EditRequest extends FormRequest
     {
         return [
             'title' => 'required|min:5|max:500', 
-            'slug' => 'required|min:5|max:500|unique:posts,slug,'.$this->route('post')->id, 
-            'content' => 'required|min:5', 
-            'description' => 'required|min:5', 
-            'posted' => 'required', 
-            'category_id' => 'required|integer',
-            "image" => 'mimes: jpeg,jpg,png|max:10240'
+            'slug' => 'required|min:5|max:500|unique:posts,slug,'.$this->route('post')->id,
         ];
     }
 }

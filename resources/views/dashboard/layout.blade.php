@@ -7,6 +7,13 @@
     <title>Dashboard</title>
 </head>
 <body>
+
+    View Main
+
+    @if (session('status'))
+    {{ session('status') }}
+    @endif
+
     @yield('content')
 </body>
 </html>

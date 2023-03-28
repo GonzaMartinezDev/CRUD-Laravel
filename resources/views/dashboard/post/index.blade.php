@@ -3,27 +3,29 @@
 @section('content')
     <h1>view index</h1>
 
-    <a href="{{ route("post.create") }}">Create</a><br>
-    
+    <a href="{{ route('post.create') }}">Create</a><br>
+
     <table class="table">
         <thead>
-            <tr>Title</tr>
-            <tr>Category</tr>
-            <tr>Posted</tr>
-            <tr>Actions</tr>
+            <tr>
+                <th>Title</th>
+                <th>Category</th>
+                <th>Posted</th>
+                <th>Actions</th>
+            </tr>
         </thead>
         <tbody>
             @foreach ($posts as $post)
                 <tr>
                     <td>{{ $post->title }}</td>
-                    <td>{{ $post->category }}</td>
+                    <td>{{ $post->category->title }}</td>
                     <td>{{ $post->posted }}</td>
                     <td>
-                        <a href="{{ route("post.edit", $post->id) }}">Edit</a>
-                        <a href="{{ route("post.show", $post) }}">See</a>
-                        <form action="{{ route("post.destroy", $post) }}" method="post">
+                        <a href="{{ route('post.edit', $post->id) }}">Edit</a>
+                        <a href="{{ route('post.show', $post) }}">See</a>
+                        <form action="{{ route('post.destroy', $post) }}" method="post">
                             @csrf
-                            @method("DELETE")
+                            @method('DELETE')
                             <button type="submit">
                                 Delete
                             </button>

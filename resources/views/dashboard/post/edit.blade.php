@@ -5,11 +5,11 @@
 
     @include('dashboard.fragment.errors')
 
-    <form action="{{ route('post.update', $post->id) }}" method="post">
+    <form action="{{ route('post.update', $post->id) }}" method="post" enctype="multipart/form-data">
         @csrf
         @method("PUT")
 
-        @include('dashboard.fragment.formCreateEdit')
+        @include('dashboard.fragment.formCreateEdit', ["task" => "edit"])
 
         <button type="submit">Send</button>
     </form>
