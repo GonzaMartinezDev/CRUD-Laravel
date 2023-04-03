@@ -20,9 +20,10 @@
                     <td>{{ $post->title }}</td>
                     <td>{{ $post->category->title }}</td>
                     <td>{{ $post->posted }}</td>
+                    <td><a href="{{ route('post.edit', $post->id) }}">Edit</a></td>
+                    <td><a href="{{ route('post.show', $post) }}">See</a></td>
+
                     <td>
-                        <a href="{{ route('post.edit', $post->id) }}">Edit</a>
-                        <a href="{{ route('post.show', $post) }}">See</a>
                         <form action="{{ route('post.destroy', $post) }}" method="post">
                             @csrf
                             @method('DELETE')

@@ -15,31 +15,33 @@
     <table>
         <thead>
             <tr>
-            <th>
-                Title
-            </th>
-            <th>
-                Slug
-            </th>
-            <th>
-                Actions
-            </th>
+                <th>
+                    Title
+                </th>
+                <th>
+                    Slug
+                </th>
+                <th>
+                    Actions
+                </th>
             </tr>
         </thead>
 
         <tbody>
             @foreach ($categories as $category)
-            <tr>
-                <td>{{ $category->title }}</td>
-                <td>{{ $category->slug }}</td>
-                <td><a href="{{ route('category.edit', $category->id) }}">Edit</a></td>
-                <td><a href="{{ route('category.show', $category->id) }}">See</a></td>
-                <td><form action="{{ route('category.destroy', $category) }}" method="POST">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit">Delete</button>
-                </form></td>
-            </tr>
+                <tr>
+                    <td>{{ $category->title }}</td>
+                    <td>{{ $category->slug }}</td>
+                    <td><a href="{{ route('category.show', $category->id) }}">See</a></td>
+                    <td><a href="{{ route('category.edit', $category->id) }}">Edit</a></td>
+                    <td>
+                        <form action="{{ route('category.destroy', $category) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit">Delete</button>
+                        </form>
+                    </td>
+                </tr>
             @endforeach
         </tbody>
     </table>
