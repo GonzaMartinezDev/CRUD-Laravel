@@ -10,7 +10,6 @@
         @method("PUT")
 
         @include('dashboard.fragment.formCreateEdit', ["task" => "edit"])
-
-        <button type="submit">Send</button>
+        
     </form>
 @endsection

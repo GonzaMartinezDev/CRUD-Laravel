@@ -1,18 +1,9 @@
-<!DOCTYPE html>
-<html lang="en">
+@extends('dashboard.layout')
+@section('content')
+    {{-- <h1>View Index</h1> --}}
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-
-<body>
-    <h1>View Index</h1>
-
-    <a href="{{ route('category.create') }}">Create</a>
-    <table>
+    <a href="{{ route('category.create') }}" class="btn btn-success my-3">Create</a>
+    <table class="table mb-3">
         <thead>
             <tr>
                 <th>
@@ -32,19 +23,16 @@
                 <tr>
                     <td>{{ $category->title }}</td>
                     <td>{{ $category->slug }}</td>
-                    <td><a href="{{ route('category.show', $category->id) }}">See</a></td>
-                    <td><a href="{{ route('category.edit', $category->id) }}">Edit</a></td>
-                    <td>
+                    <td><a href="{{ route('category.show', $category->id) }}" class="btn btn-primary my-2">See</a>
+                        <a href="{{ route('category.edit', $category->id) }}" class="btn btn-primary my-2">Edit</a>
                         <form action="{{ route('category.destroy', $category) }}" method="POST">
                             @csrf
                             @method('DELETE')
-                            <button type="submit">Delete</button>
+                            <button class="btn btn-danger" type="submit">Delete</button>
                         </form>
                     </td>
                 </tr>
             @endforeach
         </tbody>
     </table>
-</body>
-
-</html>
+@endsection
