@@ -7,7 +7,7 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>CRUD Post and Categories </h1>
+    <h1>The best blog</h1>
 
 
 </body>

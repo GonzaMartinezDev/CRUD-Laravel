@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\Blog\BlogController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\ProfileController;
@@ -16,16 +17,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Route::get('/', function () {
-//     return view('welcome');
-// });
+Route::get('/', function () {
+    return view('welcome');
+});
 
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
 
-Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
+Route::group(['prefix' => 'dashboard', 'middleware' => ['auth', 'admin']], function () {
 
     Route::get('/', function () {
         return view('dashboard');
@@ -34,6 +35,15 @@ Route::group(['prefix' => 'dashboard', 'middleware' => 'auth'], function () {
     Route::resource('/category', CategoryController::class);
     Route::resource('/post', PostController::class);
 });
+
+
+Route::group(['prefix' => 'blog'], function () {
+    Route::controller(BlogController::class)->group(function(){
+        Route::get('/', 'index')->name('web.blog.index');
+        Route::get('/{post}', 'show')->name('web.blog.show');
+    });
+});
+
 
 
 Route::middleware('auth')->group(function () {
